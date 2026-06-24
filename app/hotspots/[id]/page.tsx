@@ -2,7 +2,12 @@ import { notFound } from "next/navigation";
 import { HotspotDetail } from "@/components/HotspotDetail";
 import { getCachedRadar } from "@/lib/cache";
 
-export const dynamic = "force-dynamic";
+export async function generateStaticParams() {
+  const snapshot = await getCachedRadar();
+  return snapshot.items.map((entry) => ({
+    id: entry.event.id
+  }));
+}
 
 export default async function HotspotPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;

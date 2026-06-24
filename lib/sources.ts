@@ -118,8 +118,7 @@ async function fetchRssSource(source: SourceConfig): Promise<{ events: HotEvent[
   const response = await fetch(source.url, {
     headers: {
       "user-agent": "Mozilla/5.0 HotspotMarketingRadar/0.1"
-    },
-    next: { revalidate: 60 * 60 }
+    }
   });
 
   if (!response.ok) {

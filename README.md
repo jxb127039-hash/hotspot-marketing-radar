@@ -18,17 +18,21 @@ pnpm dev
 ```bash
 OPENAI_API_KEY=
 OPENAI_MODEL=gpt-4.1-mini
-CRON_SECRET=
 ```
 
 没有 `OPENAI_API_KEY` 时，系统会自动使用规则模板兜底，页面仍可运行。
 
-## Vercel 部署
+## GitHub Pages 部署
 
-1. 在 Vercel 导入此目录。
-2. 配置 `OPENAI_API_KEY`、`OPENAI_MODEL` 和可选的 `CRON_SECRET`。
-3. `vercel.json` 已配置 Cron：北京时间 08:00、14:00、20:00 触发 `/api/cron`。
-4. 前台读取缓存快照；`/api/snapshot` 可用于检查当前生成结果。
+仓库已配置 GitHub Actions：`.github/workflows/pages.yml`。
+
+触发方式：
+
+- 推送到 `main` 后自动构建并部署。
+- 每天 UTC 00:00、06:00、12:00 自动重建，刷新公开热点。
+- 也可以在 GitHub Actions 里手动运行 `Deploy hotspot radar`。
+
+如果需要 AI 生成更强文案，在仓库 Settings → Secrets and variables → Actions 里添加 `OPENAI_API_KEY`。
 
 ## 数据边界
 
